@@ -21,6 +21,10 @@ namespace ThunderHawk
 
         private void OnTick(object sender, EventArgs e)
         {
+            if (CurrentPlayerWeapon()!=WeaponHash.ThrownTomahawk)
+            {
+                return;
+            }
             var out1 = new OutputArgument();
             Function.Call(Hash.GET_PED_LAST_WEAPON_IMPACT_COORD, Game.Player.Character.Handle, out1);
             var pos = out1.GetResult<Vector3>();
@@ -29,6 +33,13 @@ namespace ThunderHawk
                 Function.Call((Hash)0x67943537D179597C, pos.X,pos.Y, pos.Z);
                 lastHitPos = pos;
             }
+        }
+        private WeaponHash CurrentPlayerWeapon()
+        {
+            var out1 = new OutputArgument();
+            Function.Call(Hash.GET_CURRENT_PED_WEAPON,Game.Player.Character.Handle, out1,0,0,1);
+            var hash = out1.GetResult<WeaponHash>();
+            return hash;
         }
     }
 }
