@@ -1,0 +1,8 @@
+C:\Users\dukar.000\source\repos\ThunderHawk\bin\x86\Debug\ThunderHawk.dll
+C:\Users\dukar.000\source\repos\ThunderHawk\bin\x86\Debug\ThunderHawk.pdb
+C:\Users\dukar.000\source\repos\ThunderHawk\bin\x86\Debug\ScriptHookRDRNetAPI.dll
+C:\Users\dukar.000\source\repos\ThunderHawk\obj\x86\Debug\ThunderHawk.csproj.AssemblyReference.cache
+C:\Users\dukar.000\source\repos\ThunderHawk\obj\x86\Debug\ThunderHawk.csproj.CoreCompileInputs.cache
+C:\Users\dukar.000\source\repos\ThunderHawk\obj\x86\Debug\ThunderHawk.csproj.CopyComplete
+C:\Users\dukar.000\source\repos\ThunderHawk\obj\x86\Debug\ThunderHawk.dll
+C:\Users\dukar.000\source\repos\ThunderHawk\obj\x86\Debug\ThunderHawk.pdb
