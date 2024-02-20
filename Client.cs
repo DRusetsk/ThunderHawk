@@ -14,19 +14,25 @@ namespace ThunderHawk
     public class Client : Script
     {
         private Vector3 lastHitPos = Vector3.Zero;
-        public Client() {
+        public Client() { 
             Tick +=OnTick;
             Interval = 1;
         }
-
+        async void delayAction (int delay)
+        {
+            await Task.Delay(delay);
+        }
         private void OnTick(object sender, EventArgs e)
         {
             if (CurrentPlayerWeapon()!=WeaponHash.ThrownTomahawk)
             {
+                Function.Call(Hash.SET_PED_INFINITE_AMMO, Game.Player.Character.Handle,false,CurrentPlayerWeapon())
                 return;
             }
+
             var out1 = new OutputArgument();
             Function.Call(Hash.GET_PED_LAST_WEAPON_IMPACT_COORD, Game.Player.Character.Handle, out1);
+            Function.Call(Hash.SET_PED_INFINITE_AMMO,Game.Player.Character.Handle,true,CurrentPlayerWeapon())
             var pos = out1.GetResult<Vector3>();
             if (pos.DistanceTo(Game.Player.Character.Position) < 200f && lastHitPos!=pos)
             {
@@ -39,6 +45,7 @@ namespace ThunderHawk
             var out1 = new OutputArgument();
             Function.Call(Hash.GET_CURRENT_PED_WEAPON,Game.Player.Character.Handle, out1,0,0,1);
             var hash = out1.GetResult<WeaponHash>();
+            delayAction(3000);
             return hash;
         }
     }
