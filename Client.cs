@@ -24,23 +24,26 @@ namespace ThunderHawk
         }
         private void OnTick(object sender, EventArgs e)
         {
+            //if the player is not currently wielding a Tomahawk, the function is skipped
             if (CurrentPlayerWeapon()!=WeaponHash.ThrownTomahawk)
             {
-                Function.Call(Hash.SET_PED_INFINITE_AMMO, Game.Player.Character.Handle,false,CurrentPlayerWeapon())
                 return;
             }
 
             var out1 = new OutputArgument();
             Function.Call(Hash.GET_PED_LAST_WEAPON_IMPACT_COORD, Game.Player.Character.Handle, out1);
-            Function.Call(Hash.SET_PED_INFINITE_AMMO,Game.Player.Character.Handle,true,CurrentPlayerWeapon())
             var pos = out1.GetResult<Vector3>();
+
+            var out2 = new InputArgument(WeaponHash.ThrownTomahawk);
+
             if (pos.DistanceTo(Game.Player.Character.Position) < 200f && lastHitPos!=pos)
             {
-                Function.Call((Hash)0x67943537D179597C, pos.X,pos.Y, pos.Z);
+                Function.Call((Hash)0x67943537D179597C, pos.X,pos.Y, pos.Z);//calling the hash for the thunder to strike
+                Function.Call((Hash)0x14E56BC5B5DB6A19, Game.Player.Character.Handle, out2, 2);//replenishing ammo to the tomahawk
                 lastHitPos = pos;
             }
         }
-        private WeaponHash CurrentPlayerWeapon()
+        private WeaponHash CurrentPlayerWeapon()    
         {
             var out1 = new OutputArgument();
             Function.Call(Hash.GET_CURRENT_PED_WEAPON,Game.Player.Character.Handle, out1,0,0,1);
